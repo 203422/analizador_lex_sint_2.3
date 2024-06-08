@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/styles.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <main class="container content">
+        <h1>Analizador Léxico y Sintáctico</h1>
+        <form method="post">
+            <textarea name="code" rows="10" cols="50"
+                placeholder="Escribe tu código aquí...">{{ request.form.code if request.method == 'POST' else '' }}</textarea><br>
+            <button type="submit">Analizar código</button>
+        </form>
+
+
+        <div class="output">
+            <div class="output_lex">
+                <h2>Analizador léxico</h2>
+                <ul>
+                    {% for token in tokens %}
+                        <li>{{ token }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="output_sin">
+                <h2>Analizador sintáctico</h2>
+                {% if tokens %}
+                <div class="error">
+                    {% if syntax_error %}
+                        {{ syntax_error }}
+                    {% else %}
+                        No hay errores de sintaxis
+                    {% endif %}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </main>
+
+</body>
+
+</html>

@@ -1,0 +1,301 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    ASSIGN
+    DIVIDE
+    TIMES
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> class_declaration
+Rule 2     class_declaration -> PUBLIC CLASS IDENTIFIER LBRACE method_declarations RBRACE
+Rule 3     method_declarations -> method_declaration
+Rule 4     method_declarations -> method_declarations method_declaration
+Rule 5     method_declaration -> PUBLIC STATIC VOID MAIN LPAREN STRING_TYPE LBRACKET RBRACKET IDENTIFIER RPAREN LBRACE statement RBRACE
+Rule 6     statement -> SYSTEM DOT OUT DOT PRINTLN LPAREN STRING RPAREN SEMI
+
+Terminals, with rules where they appear
+
+ASSIGN               : 
+CLASS                : 2
+DIVIDE               : 
+DOT                  : 6 6
+IDENTIFIER           : 2 5
+LBRACE               : 2 5
+LBRACKET             : 5
+LPAREN               : 5 6
+MAIN                 : 5
+OUT                  : 6
+PRINTLN              : 6
+PUBLIC               : 2 5
+RBRACE               : 2 5
+RBRACKET             : 5
+RPAREN               : 5 6
+SEMI                 : 6
+STATIC               : 5
+STRING               : 6
+STRING_TYPE          : 5
+SYSTEM               : 6
+TIMES                : 
+VOID                 : 5
+error                : 
+
+Nonterminals, with rules where they appear
+
+class_declaration    : 1
+method_declaration   : 3 4
+method_declarations  : 2 4
+program              : 0
+statement            : 5
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . class_declaration
+    (2) class_declaration -> . PUBLIC CLASS IDENTIFIER LBRACE method_declarations RBRACE
+
+    PUBLIC          shift and go to state 3
+
+    program                        shift and go to state 1
+    class_declaration              shift and go to state 2
+
+state 1
+
+    (0) S' -> program .
+
+
+
+state 2
+
+    (1) program -> class_declaration .
+
+    $end            reduce using rule 1 (program -> class_declaration .)
+
+
+state 3
+
+    (2) class_declaration -> PUBLIC . CLASS IDENTIFIER LBRACE method_declarations RBRACE
+
+    CLASS           shift and go to state 4
+
+
+state 4
+
+    (2) class_declaration -> PUBLIC CLASS . IDENTIFIER LBRACE method_declarations RBRACE
+
+    IDENTIFIER      shift and go to state 5
+
+
+state 5
+
+    (2) class_declaration -> PUBLIC CLASS IDENTIFIER . LBRACE method_declarations RBRACE
+
+    LBRACE          shift and go to state 6
+
+
+state 6
+
+    (2) class_declaration -> PUBLIC CLASS IDENTIFIER LBRACE . method_declarations RBRACE
+    (3) method_declarations -> . method_declaration
+    (4) method_declarations -> . method_declarations method_declaration
+    (5) method_declaration -> . PUBLIC STATIC VOID MAIN LPAREN STRING_TYPE LBRACKET RBRACKET IDENTIFIER RPAREN LBRACE statement RBRACE
+
+    PUBLIC          shift and go to state 7
+
+    method_declarations            shift and go to state 8
+    method_declaration             shift and go to state 9
+
+state 7
+
+    (5) method_declaration -> PUBLIC . STATIC VOID MAIN LPAREN STRING_TYPE LBRACKET RBRACKET IDENTIFIER RPAREN LBRACE statement RBRACE
+
+    STATIC          shift and go to state 10
+
+
+state 8
+
+    (2) class_declaration -> PUBLIC CLASS IDENTIFIER LBRACE method_declarations . RBRACE
+    (4) method_declarations -> method_declarations . method_declaration
+    (5) method_declaration -> . PUBLIC STATIC VOID MAIN LPAREN STRING_TYPE LBRACKET RBRACKET IDENTIFIER RPAREN LBRACE statement RBRACE
+
+    RBRACE          shift and go to state 11
+    PUBLIC          shift and go to state 7
+
+    method_declaration             shift and go to state 12
+
+state 9
+
+    (3) method_declarations -> method_declaration .
+
+    RBRACE          reduce using rule 3 (method_declarations -> method_declaration .)
+    PUBLIC          reduce using rule 3 (method_declarations -> method_declaration .)
+
+
+state 10
+
+    (5) method_declaration -> PUBLIC STATIC . VOID MAIN LPAREN STRING_TYPE LBRACKET RBRACKET IDENTIFIER RPAREN LBRACE statement RBRACE
+
+    VOID            shift and go to state 13
+
+
+state 11
+
+    (2) class_declaration -> PUBLIC CLASS IDENTIFIER LBRACE method_declarations RBRACE .
+
+    $end            reduce using rule 2 (class_declaration -> PUBLIC CLASS IDENTIFIER LBRACE method_declarations RBRACE .)
+
+
+state 12
+
+    (4) method_declarations -> method_declarations method_declaration .
+
+    RBRACE          reduce using rule 4 (method_declarations -> method_declarations method_declaration .)
+    PUBLIC          reduce using rule 4 (method_declarations -> method_declarations method_declaration .)
+
+
+state 13
+
+    (5) method_declaration -> PUBLIC STATIC VOID . MAIN LPAREN STRING_TYPE LBRACKET RBRACKET IDENTIFIER RPAREN LBRACE statement RBRACE
+
+    MAIN            shift and go to state 14
+
+
+state 14
+
+    (5) method_declaration -> PUBLIC STATIC VOID MAIN . LPAREN STRING_TYPE LBRACKET RBRACKET IDENTIFIER RPAREN LBRACE statement RBRACE
+
+    LPAREN          shift and go to state 15
+
+
+state 15
+
+    (5) method_declaration -> PUBLIC STATIC VOID MAIN LPAREN . STRING_TYPE LBRACKET RBRACKET IDENTIFIER RPAREN LBRACE statement RBRACE
+
+    STRING_TYPE     shift and go to state 16
+
+
+state 16
+
+    (5) method_declaration -> PUBLIC STATIC VOID MAIN LPAREN STRING_TYPE . LBRACKET RBRACKET IDENTIFIER RPAREN LBRACE statement RBRACE
+
+    LBRACKET        shift and go to state 17
+
+
+state 17
+
+    (5) method_declaration -> PUBLIC STATIC VOID MAIN LPAREN STRING_TYPE LBRACKET . RBRACKET IDENTIFIER RPAREN LBRACE statement RBRACE
+
+    RBRACKET        shift and go to state 18
+
+
+state 18
+
+    (5) method_declaration -> PUBLIC STATIC VOID MAIN LPAREN STRING_TYPE LBRACKET RBRACKET . IDENTIFIER RPAREN LBRACE statement RBRACE
+
+    IDENTIFIER      shift and go to state 19
+
+
+state 19
+
+    (5) method_declaration -> PUBLIC STATIC VOID MAIN LPAREN STRING_TYPE LBRACKET RBRACKET IDENTIFIER . RPAREN LBRACE statement RBRACE
+
+    RPAREN          shift and go to state 20
+
+
+state 20
+
+    (5) method_declaration -> PUBLIC STATIC VOID MAIN LPAREN STRING_TYPE LBRACKET RBRACKET IDENTIFIER RPAREN . LBRACE statement RBRACE
+
+    LBRACE          shift and go to state 21
+
+
+state 21
+
+    (5) method_declaration -> PUBLIC STATIC VOID MAIN LPAREN STRING_TYPE LBRACKET RBRACKET IDENTIFIER RPAREN LBRACE . statement RBRACE
+    (6) statement -> . SYSTEM DOT OUT DOT PRINTLN LPAREN STRING RPAREN SEMI
+
+    SYSTEM          shift and go to state 23
+
+    statement                      shift and go to state 22
+
+state 22
+
+    (5) method_declaration -> PUBLIC STATIC VOID MAIN LPAREN STRING_TYPE LBRACKET RBRACKET IDENTIFIER RPAREN LBRACE statement . RBRACE
+
+    RBRACE          shift and go to state 24
+
+
+state 23
+
+    (6) statement -> SYSTEM . DOT OUT DOT PRINTLN LPAREN STRING RPAREN SEMI
+
+    DOT             shift and go to state 25
+
+
+state 24
+
+    (5) method_declaration -> PUBLIC STATIC VOID MAIN LPAREN STRING_TYPE LBRACKET RBRACKET IDENTIFIER RPAREN LBRACE statement RBRACE .
+
+    RBRACE          reduce using rule 5 (method_declaration -> PUBLIC STATIC VOID MAIN LPAREN STRING_TYPE LBRACKET RBRACKET IDENTIFIER RPAREN LBRACE statement RBRACE .)
+    PUBLIC          reduce using rule 5 (method_declaration -> PUBLIC STATIC VOID MAIN LPAREN STRING_TYPE LBRACKET RBRACKET IDENTIFIER RPAREN LBRACE statement RBRACE .)
+
+
+state 25
+
+    (6) statement -> SYSTEM DOT . OUT DOT PRINTLN LPAREN STRING RPAREN SEMI
+
+    OUT             shift and go to state 26
+
+
+state 26
+
+    (6) statement -> SYSTEM DOT OUT . DOT PRINTLN LPAREN STRING RPAREN SEMI
+
+    DOT             shift and go to state 27
+
+
+state 27
+
+    (6) statement -> SYSTEM DOT OUT DOT . PRINTLN LPAREN STRING RPAREN SEMI
+
+    PRINTLN         shift and go to state 28
+
+
+state 28
+
+    (6) statement -> SYSTEM DOT OUT DOT PRINTLN . LPAREN STRING RPAREN SEMI
+
+    LPAREN          shift and go to state 29
+
+
+state 29
+
+    (6) statement -> SYSTEM DOT OUT DOT PRINTLN LPAREN . STRING RPAREN SEMI
+
+    STRING          shift and go to state 30
+
+
+state 30
+
+    (6) statement -> SYSTEM DOT OUT DOT PRINTLN LPAREN STRING . RPAREN SEMI
+
+    RPAREN          shift and go to state 31
+
+
+state 31
+
+    (6) statement -> SYSTEM DOT OUT DOT PRINTLN LPAREN STRING RPAREN . SEMI
+
+    SEMI            shift and go to state 32
+
+
+state 32
+
+    (6) statement -> SYSTEM DOT OUT DOT PRINTLN LPAREN STRING RPAREN SEMI .
+
+    RBRACE          reduce using rule 6 (statement -> SYSTEM DOT OUT DOT PRINTLN LPAREN STRING RPAREN SEMI .)
+
